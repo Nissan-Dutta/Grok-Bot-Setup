@@ -14,7 +14,7 @@ Yes, CrewAI runs on Grok. But Grok Bot already is your manager layer: Bots are t
 | :---- | :---- | :---- | :---- |
 | Control | Grok Bot: 3 Bots (Hackathon Captain, Research Lead, Career Agent) | Judgment, login-gated browsing (LinkedIn), drafts, approvals | Your Grok Bot weekly usage |
 | Engine | This repo on GitHub Actions cron | Scouts, filters, CrewAI crews, Notion sync | About \$10–20/month of xAI API (estimate) |
-| Memory | Notion | 3 databases \+ weekly briefs | Free |
+| Memory | Notion | 3 board databases \+ People, weekly briefs and an Engine status page | Free |
 
 Models: grok-4.3 (\$1.25 in / \$2.50 out per 1M tokens, 1M context) does the bulk scoring. grok-4.7 (\$2 / \$6) does live search and strategy. Web search and X search each cost \$5 per 1,000 calls ([xAI pricing](https://docs.x.ai/developers/pricing)).
 
@@ -29,7 +29,7 @@ flowchart TB
     RL["<b>Research Lead</b><br/>experiments, endorsers"]
     CA["<b>Career Agent</b><br/>deep dives, LinkedIn routes,<br/>applications, Sunday brief"]
   end
-  notion[("<b>Notion · shared memory</b><br/>Hackathons · Research · Jobs · Briefs")]
+  notion[("<b>Notion · shared memory</b><br/>Hackathons · Research · Jobs · People · Briefs")]
   subgraph engine["Engine · GitHub Actions"]
     direction LR
     PH["<b>Hackathon pipeline</b><br/>Daily: Devpost API, X Radar<br/>Crew: Judge, Strategist"]
@@ -131,18 +131,20 @@ Eligibility flags are shown on the row, never used to drop it silently: needs cu
 
 Companies are grouped as inference infra (Inferact, RadixArk, Fireworks, Baseten, Together, Modal, Cerebras, Etched, Lambda, CoreWeave), labs (xAI, Anthropic, OpenAI, Thinking Machines, Cohere, Perplexity), eval and agent tooling (Braintrust, Prime Intellect, Scale AI, LangChain, Exa), and Japan or Singapore (PayPay, Ninja Van). DeepInfra has no public job feed, so the X Radar watches its careers page instead.
 
-## **Notion workspace: three databases and a briefs page, built by one command**
+## **Notion workspace: three board databases, People, Briefs and Engine status, built by one command**
 
 You share one empty Notion page with the integration. python \-m boards setup-notion then builds everything under it and saves the IDs to notion\_ids.json. IDs aren't secrets, so the only secrets are the two API keys. Every row has a Key (a hash of source \+ ID), so reruns never create duplicates.
 
 | Database | Title | Key properties | Status flow |
 | :---- | :---- | :---- | :---- |
-| Hackathons | Event name | Score, Deadline, Dates, Format (Online / In person / Hybrid), Host, Source, URL, Why, Plan, Flags, Found | New → Shortlist → Applying → Building → Submitted / Skipped |
-| Research | Paper, idea or call | Type (Paper / Idea / CFP), Score, Deadline, Venue, URL, Summary, Verdict (Go / Fix / Kill), Found | New → Reading → Pursuing → Drafting → Submitted / Parked |
-| Jobs | Role · Company | Company, Score, Location, Flags, URL, Why, Contacts, Draft, Source, Posted, Found | New → Shortlist → Drafted → Applied → Interview → Offer / Closed |
-| Briefs | Weekly brief · date | A page per week: top 3 moves per board, deadlines in the next 14 days, stale items | n/a |
+| Hackathons | Event name | Score, Deadline, Dates, Format (Online / In person / Hybrid), Host, Source, URL, Why, Plan, Flags, Found, Status changed | New → Shortlist → Applying → Building → Submitted / Skipped |
+| Research | Paper, idea or call | Type (Paper / Idea / CFP), Score, Deadline, Venue, URL, Summary, Verdict (Go / Fix / Kill), Found, Status changed | New → Reading → Pursuing → Drafting → Submitted / Parked |
+| Jobs | Role · Company | Company, Score, Location, Flags, URL, Why, Contacts, Draft, Source, Posted, Found, Deadline (only when the posting states one), Status changed | New → Shortlist → Drafted → Applied → Interview → Offer / Closed |
+| People | Name | Handle/URL, Company, Role, Source, Source row, Hook, Handed off, Linked jobs (relation to Jobs), Key (company \+ handle) | n/a. Bots write it: handoffs from the Captain and Research Lead, linked by the Career Agent |
+| Briefs | Weekly brief · date | A page per week: top 3 moves per board, deadlines in the next 14 days, stale items, what you advanced, and a Status snapshot table for next week's diff | n/a |
+| Engine status | One page | Per pipeline: last successful run time, rows added, sources that failed. The engine overwrites it on every run | n/a |
 
-The engine only ever creates rows and fills in empty fields. It never touches Status, which belongs to you and your Bots. This is what lets the Bots and the pipelines share one database without overwriting each other.
+The engine only ever creates rows and fills in empty fields. It never touches Status or Status changed, which belong to you and your Bots. A Bot sets Status changed to today whenever it changes Status. If you change Status by hand in Notion, set it too, or add a Notion database automation that does it for you, where your plan supports that. The Sunday brief also diffs each week's Status snapshot, so moves are counted even when the date is missing. This is what lets the Bots and the pipelines share one database without overwriting each other.
 
 ## **Schedules and cost: about \$17 a month at defaults, about \$8 on the lean setting**
 
@@ -166,7 +168,7 @@ Everything runs in GitHub's cloud and in Grok Bot. Your laptop only needs a brow
 * ☐ **xAI key.** Create one at console.x.ai and add \$10 of credit.  
 * ☐ **Notion.** Make an internal integration and copy its token. Create an empty page called "Agent Boards", then share it with the integration (••• → Connections).  
 * ☐ **Repo.** Make a private GitHub repo and upload the agent-boards folder. Add two secrets under Settings → Secrets → Actions: XAI\_API\_KEY and NOTION\_TOKEN.  
-* ☐ **Build Notion.** Go to Actions → "Setup Notion" → Run workflow, and paste the page URL. It builds the 3 databases and commits notion\_ids.json.  
+* ☐ **Build Notion.** Go to Actions → "Setup Notion" → Run workflow, and paste the page URL. It builds the databases (Hackathons, Research, Jobs, People, Briefs) and the Engine status page, then commits notion\_ids.json.  
 * ☐ **Profile.** Edit profile.yaml: your skills, projects, target roles, locations and dealbreakers. Everything the scorers do depends on this file.  
 * ☐ **Dry run.** Run each board workflow once with dry\_run ticked. It writes a report to the run summary and never touches Notion. Untick it for the real run.  
 * ☐ **Grok Bot.** Create the 3 Bots by pasting from grokbot/bots/. Install the Notion connector from Marketplace. Save the skills in grokbot/skills/, set up the routines in grokbot/routines.md, then open the War Room group chat.  

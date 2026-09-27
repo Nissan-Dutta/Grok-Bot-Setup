@@ -13,7 +13,7 @@
 
 ## Steps
 1. Open the live posting. If it's gone, set Status to **Closed** with the reason "posting removed" and move on.
-2. Read the full description. Pull out the must-haves, the nice-to-haves, the team, location and remote rules, the visa and sponsorship language, and any enrollment or graduation-date requirement.
+2. Read the full description. Pull out the must-haves, the nice-to-haves, the team, location and remote rules, the visa and sponsorship language, and any enrollment or graduation-date requirement. If the posting states an application deadline (common for internships and residencies), write it to the row's **Deadline**, with timezone.
 3. **Check the flags.** Confirm or correct each engine flag against the real text, and add any it missed. Never remove a row because of a flag. Flags are for Nissan to judge.
 4. **Check the angle.** Is the Fit Scorer's "angle to lead with" the strongest match to the must-haves? If not, pick a better one and say why.
 5. **Check the contacts.** For each Referral Mapper contact, confirm they're still on the team (X bio or recent posts) and that the hook is real and under 60 days old.
@@ -23,7 +23,7 @@
    - A clear, small ask: a 15-minute call, or "who's the right person for X".
    - Start the first line with `[REWRITE: …]` and a suggestion. The first line is always Nissan's to write.
 7. List 2–3 résumé bullet swaps that line up with the must-haves.
-8. Update the row: Flags (add "Deep-dived <date>"), Why, Contacts and Draft. Then set Status to **Drafted**.
+8. Update the row: Flags (add "Deep-dived <date>"), Why, Contacts and Draft. Then set Status to **Drafted** and Status changed to today.
 
 ## Validate
 - Every must-have from the posting either has a matching résumé bullet or is listed as a gap.

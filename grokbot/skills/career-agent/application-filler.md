@@ -9,7 +9,7 @@
 ## Inputs & access
 - The Notion row: URL, the résumé swaps from the Deep Dive, and Flags.
 - `/workspace/proof-pack/`: `resume.pdf` (or the tailored version Nissan names), `answers.md` (work authorization, start date, links, EEO preferences, salary stance) and `links.md`.
-- The Bot browser, on the company's ATS (Greenhouse, Lever, Ashby, Workday). If an account is needed, Nissan logs in through secure handoff.
+- The Bot browser, on the company's ATS (Greenhouse, Lever, Ashby, Workday). If an account is needed, the Bot hands Nissan control of the Agent Computer to log in.
 
 ## Steps
 1. Open the posting's Apply page and list every field before filling anything in.

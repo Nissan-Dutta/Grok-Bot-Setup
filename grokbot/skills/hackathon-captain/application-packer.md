@@ -9,7 +9,7 @@
 ## Inputs & access
 - The Notion row: URL, Plan (the Strategist's pitch and 48-hour plan) and Why.
 - `/workspace/proof-pack/`: `resume.pdf`, `bio.md` (3 lines), `answers.md` (standard answers), `links.md` (EvalCI, agent-eval-harness, GitHub, X, demo video) and `headshot.jpg`.
-- The Bot browser. If the form needs an account, use secure handoff so Nissan logs in. Never create an account yourself.
+- The Bot browser. If the form needs an account, hand Nissan control of the Agent Computer to log in. Never create an account yourself.
 
 ## Steps
 1. Set the row's Status to **Applying**.

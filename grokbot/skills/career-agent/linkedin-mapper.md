@@ -9,11 +9,11 @@
 
 ## Inputs & access
 - The Notion row: Company, the team named in the posting, and existing Contacts.
-- **Nissan's LinkedIn login, through Grok Bot's secure browser handoff.** Nissan types the password and completes 2FA. The Bot never sees, stores or reuses the credential.
+- **Nissan's LinkedIn login, by taking control of the Agent Computer.** Nissan types the password and completes 2FA. The Bot never sees, stores or reuses the credential, and it's never pasted into chat.
 - `/workspace/proof-pack/profile.md`, for schools (UWC, Goucher) and past orgs.
 
 ## Steps
-1. Ask Nissan to start the secure handoff and log in. Wait for confirmation.
+1. Ask Nissan to open **Agent Computer**, take control, log in to LinkedIn (password and 2FA), then return control. Wait for "continue".
 2. For each company, run at human speed: pause at least 5 seconds between page loads, and view at most 40 profiles per session.
    - Alumni: search people at <company> who went to UWC or Goucher.
    - Mutuals: search people at <company> who are 2nd-degree connections, then note the shared connection.
@@ -21,7 +21,7 @@
 3. For each strong route, record the name, title, the route ("UWC alum", "mutual: <name>") and the profile URL.
 4. Pick the best route per company. Prefer, in order: a mutual who knows Nissan well, then an alum on the team, then an alum at the company, then a 2nd-degree connection on the team.
 5. Append the routes to the row's Contacts, tagged "LinkedIn · <date>". Don't overwrite X contacts.
-6. Log out when finished.
+6. Log out when finished. The browser session is shared with every Bot on the computer, so leaving it signed in would give all of them LinkedIn access.
 
 ## Validate
 - **Read-only held.** No connection requests, messages, likes, follows, endorsements, settings changes or profile edits. Check the activity log before logging out.
@@ -37,5 +37,5 @@ LinkedIn map · <date> · <n> companies · <m> profiles viewed
 ```
 
 ## Needs approval
-- Starting the login handoff, every time.
+- The login, every time. Nissan takes control of the Agent Computer to do it.
 - **Any write on LinkedIn.** This skill never does one. An intro request is drafted here, and Nissan sends it.

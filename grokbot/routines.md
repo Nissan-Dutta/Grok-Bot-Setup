@@ -18,7 +18,7 @@ Open a one-to-one chat with the owning Bot and paste the prompt. Grok Bot will c
 ## Rules every routine follows
 
 - **Notion unreachable → report and stop.** Don't work from memory.
-- **Check whether the engine ran.** Read the Notion page "Engine status". The engine updates it on every run with the time and row counts for each pipeline. Get the time of this Bot's pipeline's last successful run:
+- **Check whether the engine ran.** Read the Notion table "Engine status". It has one row per pipeline (Jobs, Hackathons, Research), and the engine updates that row on every run with the last run time, the last successful run time, rows added and any sources that failed. Get the time of this Bot's pipeline's last successful run:
   - 36 hours or more ago (8 days for Research): **put a warning at the top of the summary** ("Engine hasn't run since <time>. Check the GitHub Actions tab"), then **carry on with the rows already in Notion**.
   - A successful run that added 0 rows is a quiet day. Keep working.
   - Deadlines on existing rows never wait for the engine.
@@ -41,7 +41,7 @@ Every weekday at 8:00 AM America/New_York:
 4. Post one summary here: new rows, rows shortlisted (flagged ones first, with their
    flags), drafts ready (with Notion links), and the count of rows left at New.
 Approval boundary: do not send any message and do not submit any application. Drafts only.
-If Notion is unreachable, report that and stop. If the "Engine status" page shows no
+If Notion is unreachable, report that and stop. If the "Engine status" table shows no
 successful Jobs run in 36 hours, put a warning at the top of the summary and continue with
 the rows already in Notion.
 ```
@@ -59,7 +59,7 @@ Every day at 8:30 AM America/New_York:
 4. Post one summary here: deadlines in the next 7 days (with timezone), forms waiting for my
    "submit", teammate drafts, rows waiting on me (Unclear), and handoffs sent.
 Approval boundary: never submit, register, RSVP, join a server or message anyone.
-If Notion is unreachable, report that and stop. If the "Engine status" page shows no
+If Notion is unreachable, report that and stop. If the "Engine status" table shows no
 successful Hackathons run in 36 hours, put a warning at the top of the summary and still do
 steps 1–4 on the existing rows. Deadlines don't wait for the engine.
 ```
@@ -83,7 +83,7 @@ Every Monday at 9:00 AM America/New_York:
 Approval boundary: only I move an Idea to Pursuing, Drafting, Submitted or Parked, and only I
 set Verdict to Kill. Never submit to arXiv, OpenReview or TMLR, never email anyone, and never
 spend money on compute. Record only numbers produced by code that ran.
-If Notion is unreachable, report that and stop. If the "Engine status" page shows no
+If Notion is unreachable, report that and stop. If the "Engine status" table shows no
 successful Research run in 8 days, put a warning at the top of the summary and continue.
 ```
 

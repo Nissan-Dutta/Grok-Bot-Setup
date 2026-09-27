@@ -1,0 +1,52 @@
+# Everything the scorers know about you. Keep it true: the Fit Scorer and Outreach Drafter
+# never invent facts, so anything missing here is simply not used.
+# Fields marked TODO change how eligibility flags are weighted. Until you fill them in,
+# flags are shown on rows but never lower a score.
+#
+# PRIVACY: this repo is public, so don't commit private answers here. Put them in a GitHub
+# secret named PROFILE_PRIVATE instead (same YAML shape; it overrides this file), e.g.
+#   enrolled: true
+#   graduation: "2027-05"
+#   work_authorization: {us_citizen_or_pr: false, needs_us_sponsorship: true}
+
+name: Nissan Dutta
+schools: [UWC, Goucher College]
+degree: bachelors             # bachelors | masters | phd
+enrolled: null                # TODO true if currently enrolled (many internships require it)
+graduation: null              # TODO e.g. "2027-05"; used to spot graduation-window mismatches
+work_authorization:
+  us_citizen_or_pr: null      # TODO true | false
+  needs_us_sponsorship: null  # TODO true | false (now or in the future)
+
+locations: [US, Japan, Singapore, Remote]
+languages: [english]          # AI-tutor roles for other languages are skipped unless listed
+
+thesis: >
+  Statistical rigor for AI evaluation: confidence intervals, significance tests and
+  reliability for benchmarks and agents; inference systems.
+
+proof:
+  - name: EvalCI
+    what: Bootstrap confidence intervals and McNemar tests for model evals, as a CI tool.
+    url: https://github.com/Nissan-Dutta  # TODO link the repo
+  - name: agent-eval-harness
+    what: A harness for evaluating agents end to end.
+    url: https://github.com/Nissan-Dutta  # TODO link the repo
+
+target_roles:
+  - AI / ML engineering internships
+  - Research engineering internships and residencies (evals, inference, agents)
+  - Remote applied-AI roles open to early-career engineers
+  - Open applications at small AI labs
+  - Paid remote AI evaluation or tutoring work in coding, math or statistics
+
+# Words that earn keyword points when they appear in a posting.
+keywords: [eval, evaluation, benchmark, statistic, bootstrap, confidence interval, significance,
+           reliability, inference, serving, vllm, sglang, kernel, agent, reinforcement learning,
+           rlhf, llm, python, pytorch, open source]
+
+# An ai-contract role must mention one of these in its title.
+contract_keywords: [coding, software, python, stem, math, statistics, data, computer science,
+                    engineering, english]
+
+dealbreakers: []              # e.g. ["unpaid", "relocation to X"]

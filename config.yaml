@@ -1,0 +1,154 @@
+# Agent Boards engine configuration. Profile facts live in profile.yaml.
+
+models:
+  bulk: grok-4.3      # Fit Scorer, Outreach Drafter
+  search: grok-4.7    # Referral Mapper (live X + web search)
+
+# USD per 1M tokens [in, out], and per server-side search call. Used for the cost line in reports.
+prices:
+  grok-4.3: [1.25, 2.50]
+  grok-4.7: [2.00, 6.00]
+  tool_call: 0.005
+
+lean: false           # true = Referral Mapper only on scores >= referral_min_score_lean
+
+jobs:
+  top_n: 25                 # postings sent to the Fit Scorer each day
+  per_company_cap: 3        # so one big board can't flood the top 25
+  referral_top: 5           # Referral Mapper runs on this many top scores
+  referral_min_score: 0
+  referral_min_score_lean: 75
+  draft_top: 10
+  draft_min_score: 60
+  draft_max_words: 110
+  max_age_days: 45          # older postings are skipped (open applications and residencies exempt)
+  regions: [US, JP, SG, REMOTE]
+
+  # Seats reserved per lane inside top_n, so internships don't crowd out remote roles.
+  lane_min:
+    internship: 8
+    applied-ai: 5
+    residency: 3
+    open-application: 2
+    ai-contract: 2
+
+  weights:
+    lane:
+      residency: 32
+      internship: 30
+      open-application: 28
+      applied-ai: 26      # remote-compatible (or Japan/Singapore) roles at target companies
+      new-grad: 20
+      ai-contract: 14     # paid remote AI tutor / trainer / evaluator work
+    tier:
+      lab: 20
+      evals: 20
+      infra: 18
+      asia: 16
+      applied: 14
+    simplify_ai_category: 5
+    notable: 12
+    remote: 10
+    keyword_cap: 14
+    flag_penalty:
+      citizenship: 25
+      no_sponsorship: 15
+      phd: 15
+      masters: 10
+      grad_window: 10
+      enrollment: 20
+
+  max_age_days_simplify: 150  # Simplify lists only still-open roles
+
+  # Title relevance: the best positive rule plus the worst negative rule that match.
+  title_relevance:
+    - points: 20
+      words: ['machine learning', '\bml\b', '\bai\b', '\bllms?\b', 'research (engineer|scientist)', 'inference',
+              '\bevals?\b', 'evaluation', '\bagents?\b', 'deep learning', '\bnlp\b', 'language model',
+              'reinforcement', 'gen(erative)? ?ai', 'computer vision', 'model (training|serving)', 'kernel', 'gpu',
+              'member of technical staff', 'applied scien']
+    - points: 8
+      words: ['software', 'engineer', 'data scien', 'platform', 'infrastructure', 'backend', 'systems',
+              'quantitative', 'developer', 'full[- ]stack', 'research']
+    - points: -12
+      words: ['analyst', 'analytics', 'business', 'financ', 'operations', 'commercial', 'marketing',
+              'consult', 'accounting', 'actuar', 'audit', 'supply chain', 'procurement', '\bit\b', 'help ?desk']
+
+  # Well-known employers outside the target list get a bump ("top internships").
+  notable_companies: [Google, DeepMind, Meta, Microsoft, Apple, Amazon, NVIDIA, Netflix, Stripe, Databricks,
+                      Snowflake, Palantir, Jane Street, Citadel, Two Sigma, Hudson River Trading, Jump Trading,
+                      D. E. Shaw, IBM, Adobe, Salesforce, Uber, Airbnb, Pinterest, LinkedIn, Figma, Ramp, Plaid,
+                      Roblox, Tesla, SpaceX, Waymo, Bloomberg, Qualcomm, AMD, Intel, Samsung, Sony, Toyota Research,
+                      Allen Institute, Ai2, Character.AI, Runway, Duolingo, Coinbase, Robinhood, DoorDash, Instacart,
+                      Dropbox, Atlassian, Cloudflare, Datadog, MongoDB, Shopify, Spotify, Snap, TikTok, ByteDance,
+                      Two Six, Scale AI, Mistral, Hugging Face, Adept, Imbue, Poolside, Luma, Suno, Figure, Anduril]
+
+  simplify:
+    - name: Simplify · internships (Summer 2027 + off-cycle)
+      source: simplify-internships
+      url: https://raw.githubusercontent.com/SimplifyJobs/Summer2027-Internships/dev/.github/scripts/listings.json
+      categories: [AI/ML/Data, Software, Software Engineering, "Data Science, AI & Machine Learning"]
+      terms: [Fall 2026, Winter 2027, Spring 2027, Summer 2027, Fall 2027]
+    - name: Simplify · new grad
+      source: simplify-newgrad
+      url: https://raw.githubusercontent.com/SimplifyJobs/New-Grad-Positions/dev/.github/scripts/listings.json
+      categories: [AI/ML/Data, Software, Software Engineering, "Data Science, AI & Machine Learning"]
+
+  # Target companies. Slugs marked ✓ were confirmed against live boards on 2026-09-27.
+  # `ats: auto` tries Greenhouse, Ashby and Lever with the slug candidates; run
+  # `python -m boards probe` (or the "Probe boards" workflow) to pin what it finds.
+  companies:
+    # Labs
+    - {name: xAI, ats: greenhouse, slug: xai, tier: lab}                        # ✓
+    - {name: Anthropic, ats: greenhouse, slug: anthropic, tier: lab}            # ✓
+    - {name: OpenAI, ats: ashby, slug: openai, tier: lab}                       # ✓
+    - {name: Thinking Machines, ats: ashby, slug: thinkingmachines, tier: lab}  # ✓
+    - {name: Cohere, ats: ashby, slug: cohere, tier: lab}                       # ✓
+    - {name: Perplexity, ats: ashby, slug: Perplexity, tier: lab}               # ✓
+    - {name: Mistral AI, ats: auto, slug: [mistral, mistral.ai, mistralai], tier: lab}
+    - {name: Physical Intelligence, ats: ashby, slug: physicalintelligence, tier: lab}  # ✓
+    - {name: Sakana AI, ats: auto, slug: [sakana, sakanaai, sakana-ai], tier: asia}
+    # Inference infrastructure
+    - {name: Inferact, ats: ashby, slug: inferact, tier: infra}                 # ✓ vLLM team
+    - {name: RadixArk, ats: ashby, slug: radixark, tier: infra}                 # ✓ SGLang team
+    - {name: Fireworks AI, ats: greenhouse, slug: fireworksai, tier: infra}     # ✓
+    - {name: Baseten, ats: ashby, slug: baseten, tier: infra}                   # ✓
+    - {name: Together AI, ats: greenhouse, slug: togetherai, tier: infra}       # ✓
+    - {name: Modal, ats: ashby, slug: modal, tier: infra}                       # ✓
+    - {name: Cerebras, ats: ashby, slug: cerebras, tier: infra}                 # ✓
+    - {name: Etched, ats: ashby, slug: Etched, tier: infra}                     # ✓
+    - {name: Lambda, ats: ashby, slug: lambda, tier: infra}                     # ✓
+    - {name: CoreWeave, ats: greenhouse, slug: coreweave, tier: infra}          # ✓
+    - {name: d-Matrix, ats: ashby, slug: d-Matrix, tier: infra}                 # ✓
+    - {name: Tenstorrent, ats: greenhouse, slug: tenstorrent, tier: infra}      # ✓
+    - {name: Groq, ats: auto, slug: [groq, groqinc], tier: infra}
+    - {name: Anyscale, ats: auto, slug: [anyscale], tier: infra}
+    # Evals, data and agent tooling
+    - {name: Braintrust, ats: ashby, slug: braintrust, tier: evals}             # ✓
+    - {name: Prime Intellect, ats: ashby, slug: PrimeIntellect, tier: evals}    # ✓
+    - {name: Scale AI, ats: greenhouse, slug: scaleai, tier: evals}             # ✓
+    - {name: LangChain, ats: ashby, slug: langchain, tier: evals}               # ✓
+    - {name: Exa, ats: ashby, slug: exa, tier: evals}                           # ✓
+    - {name: Weights & Biases, ats: greenhouse, slug: weights_and_biases, tier: evals}  # ✓
+    - {name: Arize AI, ats: greenhouse, slug: arizeai, tier: evals}             # ✓
+    - {name: Snorkel AI, ats: greenhouse, slug: snorkelai, tier: evals}         # ✓
+    - {name: Hugging Face, ats: auto, slug: [huggingface, hugging-face], tier: evals}
+    # Applied AI (many hire remote)
+    - {name: Cognition, ats: ashby, slug: cognition, tier: applied}             # ✓
+    - {name: Cursor, ats: ashby, slug: cursor, tier: applied}                   # ✓ Anysphere
+    - {name: Replit, ats: ashby, slug: replit, tier: applied}                   # ✓
+    - {name: Sierra, ats: ashby, slug: Sierra, tier: applied}                   # ✓
+    - {name: Decagon, ats: ashby, slug: decagon, tier: applied}                 # ✓
+    - {name: Harvey, ats: ashby, slug: harvey, tier: applied}                   # ✓
+    - {name: ElevenLabs, ats: ashby, slug: elevenlabs, tier: applied}           # ✓ remote-first
+    - {name: Glean, ats: greenhouse, slug: gleanwork, tier: applied}            # ✓
+    - {name: Vercel, ats: greenhouse, slug: vercel, tier: applied}              # ✓ remote-friendly
+    - {name: Notion, ats: ashby, slug: notion, tier: applied}                   # ✓
+    - {name: Databricks, ats: auto, slug: [databricks], tier: applied}
+    # Remote AI experience: contract evaluation and tutoring work
+    - {name: Mercor, ats: ashby, slug: mercor, tier: applied}                   # ✓
+    - {name: Handshake, ats: ashby, slug: handshake, tier: applied}             # ✓ Handshake AI fellowships
+    - {name: Surge AI, ats: ashby, slug: surge-ai, tier: evals}                 # ✓
+    # Japan and Singapore
+    - {name: Ninja Van, ats: lever, slug: ninjavan, tier: asia}                 # ✓
+    - {name: PayPay, ats: auto, slug: [paypay, paypay-corporation], tier: asia}

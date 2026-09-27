@@ -1,0 +1,39 @@
+name: Setup Notion
+
+on:
+  workflow_dispatch:
+    inputs:
+      page_url:
+        description: "URL of the empty 'Agent Boards' page, shared with your Notion integration"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Build databases
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          PAGE_URL: ${{ inputs.page_url }}
+        run: |
+          if [ -f notion_ids.json ]; then
+            echo "notion_ids.json already exists. Delete it first to rebuild." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          python -m boards setup-notion --page "$PAGE_URL"
+      - name: Commit notion_ids.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add notion_ids.json
+          git commit -m "Add Notion database IDs"
+          git push

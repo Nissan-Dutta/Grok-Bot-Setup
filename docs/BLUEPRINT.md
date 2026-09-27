@@ -14,7 +14,7 @@ Yes, CrewAI runs on Grok. But Grok Bot already is your manager layer: Bots are t
 | :---- | :---- | :---- | :---- |
 | Control | Grok Bot: 3 Bots (Hackathon Captain, Research Lead, Career Agent) | Judgment, login-gated browsing (LinkedIn), drafts, approvals | Your Grok Bot weekly usage |
 | Engine | This repo on GitHub Actions cron | Scouts, filters, CrewAI crews, Notion sync | About \$10–20/month of xAI API (estimate) |
-| Memory | Notion | 3 board databases \+ People, weekly briefs and an Engine status page | Free |
+| Memory | Notion | 3 board databases \+ People, weekly briefs and an Engine status table | Free |
 
 Models: grok-4.3 (\$1.25 in / \$2.50 out per 1M tokens, 1M context) does the bulk scoring. grok-4.7 (\$2 / \$6) does live search and strategy. Web search and X search each cost \$5 per 1,000 calls ([xAI pricing](https://docs.x.ai/developers/pricing)).
 
@@ -139,10 +139,10 @@ You share one empty Notion page with the integration. python \-m boards setup-no
 | :---- | :---- | :---- | :---- |
 | Hackathons | Event name | Score, Deadline, Dates, Format (Online / In person / Hybrid), Host, Source, URL, Why, Plan, Flags, Found, Status changed | New → Shortlist → Applying → Building → Submitted / Skipped |
 | Research | Paper, idea or call | Type (Paper / Idea / CFP), Score, Deadline, Venue, URL, Summary, Verdict (Go / Fix / Kill), Found, Status changed | New → Reading → Pursuing → Drafting → Submitted / Parked |
-| Jobs | Role · Company | Company, Score, Location, Flags, URL, Why, Contacts, Draft, Source, Posted, Found, Deadline (only when the posting states one), Status changed | New → Shortlist → Drafted → Applied → Interview → Offer / Closed |
+| Jobs | Role · Company | Company, Score, Lane, Remote, Location, Flags, URL, Why, Contacts, Draft, Resume edits, Source, Posted, Found, Deadline (only when the posting states one), Status changed | New → Shortlist → Drafted → Applied → Interview → Offer / Closed |
 | People | Name | Handle/URL, Company, Role, Source, Source row, Hook, Handed off, Linked jobs (relation to Jobs), Key (company \+ handle) | n/a. Bots write it: handoffs from the Captain and Research Lead, linked by the Career Agent |
 | Briefs | Weekly brief · date | A page per week: top 3 moves per board, deadlines in the next 14 days, stale items, what you advanced, and a Status snapshot table for next week's diff | n/a |
-| Engine status | One page | Per pipeline: last successful run time, rows added, sources that failed. The engine overwrites it on every run | n/a |
+| Engine status | Pipeline (one row each) | Last success, Last run, Rows added, Scouted, Failed sources, Run (link to the GitHub Actions run). The engine updates its pipeline's row on every run | n/a |
 
 The engine only ever creates rows and fills in empty fields. It never touches Status or Status changed, which belong to you and your Bots. A Bot sets Status changed to today whenever it changes Status. If you change Status by hand in Notion, set it too, or add a Notion database automation that does it for you, where your plan supports that. The Sunday brief also diffs each week's Status snapshot, so moves are counted even when the date is missing. This is what lets the Bots and the pipelines share one database without overwriting each other.
 

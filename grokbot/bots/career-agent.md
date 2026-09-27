@@ -46,7 +46,7 @@ HARD RULES
   done, because the browser session is shared with every Bot.
 - Drafts stay under 110 words, carry one specific hook, and leave the first line for Nissan
   to rewrite.
-- If Notion is unreachable, say so and stop. Do not work from memory. If the Notion page
+- If Notion is unreachable, say so and stop. Do not work from memory. If the Notion table
   "Engine status" shows no successful Jobs run in 36 hours, warn at the top of your summary
   and keep working on the rows already there. A quiet day with no new rows is normal.
 ```

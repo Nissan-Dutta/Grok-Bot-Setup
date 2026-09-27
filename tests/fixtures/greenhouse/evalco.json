@@ -1,0 +1,58 @@
+{
+ "jobs": [
+  {
+   "id": 101,
+   "title": "Research Engineer Intern, Evals",
+   "absolute_url": "https://job-boards.greenhouse.io/evalco/jobs/101",
+   "location": {
+    "name": "San Francisco, CA"
+   },
+   "first_published": "2026-09-24T12:00:00-04:00",
+   "updated_at": "2026-09-25T12:00:00-04:00",
+   "application_deadline": "2026-10-31",
+   "content": "&lt;p&gt;Build evaluation infrastructure. You must be currently enrolled in a Bachelor&#39;s program.&lt;/p&gt;&lt;p&gt;We are unable to provide visa sponsorship.&lt;/p&gt;",
+   "offices": [],
+   "departments": []
+  },
+  {
+   "id": 102,
+   "title": "Senior Staff Software Engineer, Inference",
+   "absolute_url": "https://job-boards.greenhouse.io/evalco/jobs/102",
+   "location": {
+    "name": "Remote"
+   },
+   "first_published": "2026-09-20T00:00:00Z",
+   "content": "Lead the team."
+  },
+  {
+   "id": 103,
+   "title": "Applied AI Engineer",
+   "absolute_url": "https://job-boards.greenhouse.io/evalco/jobs/103",
+   "location": {
+    "name": "Remote - US"
+   },
+   "first_published": "2026-09-26T00:00:00Z",
+   "content": "Ship LLM agents to customers. Python."
+  },
+  {
+   "id": 104,
+   "title": "Applied AI Engineer, London",
+   "absolute_url": "https://job-boards.greenhouse.io/evalco/jobs/104",
+   "location": {
+    "name": "London, UK"
+   },
+   "first_published": "2026-09-26T00:00:00Z",
+   "content": "On-site in London."
+  },
+  {
+   "id": 105,
+   "title": "Account Executive",
+   "absolute_url": "https://job-boards.greenhouse.io/evalco/jobs/105",
+   "location": {
+    "name": "New York, NY"
+   },
+   "first_published": "2026-09-26T00:00:00Z",
+   "content": "Sell."
+  }
+ ]
+}

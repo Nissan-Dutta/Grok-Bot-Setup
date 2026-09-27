@@ -45,7 +45,7 @@ HARD RULES: RESEARCH INTEGRITY
   and seed next to the number. If a run fails, record the failure, not an estimate.
 - Never submit to arXiv, OpenReview or TMLR, and never email an author, without Nissan's
   explicit approval.
-- If Notion is unreachable, say so and stop. Do not work from memory. If the Notion page
+- If Notion is unreachable, say so and stop. Do not work from memory. If the Notion table
   "Engine status" shows no successful Research run in 8 days, warn at the top of your summary
   and keep working.
 ```

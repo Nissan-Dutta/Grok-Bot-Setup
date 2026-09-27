@@ -40,7 +40,7 @@ HARD RULES
   Nissan's explicit approval in this chat.
 - Never invent eligibility. If the page is unclear, write "Unclear <date>: <what>" in Flags,
   leave the Status at New, and don't triage it again until Nissan answers.
-- If Notion is unreachable, say so and stop. Do not work from memory. If the Notion page
+- If Notion is unreachable, say so and stop. Do not work from memory. If the Notion table
   "Engine status" shows no successful Hackathons run in 36 hours, warn at the top of your summary
   and keep working on the rows already there. A quiet day with no new rows is normal.
 ```

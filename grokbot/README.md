@@ -19,20 +19,21 @@ Two skills are shared: [`handoff-to-career`](skills/shared/handoff-to-career.md)
 ## Setup (about 20 minutes)
 
 1. **Create the 3 Bots.** Name each one exactly as above, then paste the fenced block from its `bots/*.md` into the Bot's description.
-2. **Install the Notion connector** from Marketplace, and give it the "Agent Boards" page. If Marketplace has no Notion connector for your account, the Bots can use Notion in the shared browser instead. Log in once by taking control of the Agent Computer.
-3. **Fill the proof pack** on the Bot computer (the Bots share one computer): `/workspace/proof-pack/` with `resume.pdf`, `bio.md`, `answers.md`, `links.md`, `profile.md` and `headshot.jpg`.
-4. **Save the skills.** For each file in `skills/`, open any Bot and say: *"Save this as a skill called `<name>`"*, then paste the file. Private skills are one library shared by all Bots, which is why the names carry a prefix. Check that they appear under Marketplace → Your plugins → Manage plugins and skills → Private skills.
-5. **Set the Auto-Review rules** listed at the bottom of [routines.md](routines.md).
-6. **Create the routines** from [routines.md](routines.md). Test run each one, then enable it.
-7. **Open the War Room.** Create a group chat with the 3 Bots. The cap is 6, which leaves room for the Outreach Writer later.
+2. **Build Notion and start the engine** by following [ENGINE.md](../ENGINE.md) (about 15 minutes).
+3. **Install the Notion connector** from Marketplace, and give it the "Agent Boards" page. If Marketplace has no Notion connector for your account, the Bots can use Notion in the shared browser instead. Log in once by taking control of the Agent Computer.
+4. **Fill the proof pack** on the Bot computer (the Bots share one computer): `/workspace/proof-pack/` with `resume.pdf`, `bio.md`, `answers.md`, `links.md`, `profile.md` and `headshot.jpg`.
+5. **Save the skills.** For each file in `skills/`, open any Bot and say: *"Save this as a skill called `<name>`"*, then paste the file. Private skills are one library shared by all Bots, which is why the names carry a prefix. Check that they appear under Marketplace → Your plugins → Manage plugins and skills → Private skills.
+6. **Set the Auto-Review rules** listed at the bottom of [routines.md](routines.md).
+7. **Create the routines** from [routines.md](routines.md). Test run each one, then enable it.
+8. **Open the War Room.** Create a group chat with the 3 Bots. The cap is 6, which leaves room for the Outreach Writer later.
 
-## Before the engine exists
+## Engine status
 
-The Python engine isn't in this repo yet, so nothing fills Notion automatically and the "Engine status" page doesn't exist. Until then the Bots still run, but each routine opens with an "engine hasn't run" warning. To get value this week:
+The **Jobs** pipeline is built (see [ENGINE.md](../ENGINE.md)): it fills the Jobs database every morning and updates its row in the "Engine status" table. The Hackathons and Research pipelines aren't built yet. Until they are:
 
-- **Build the Notion databases by hand**, using the schema in [docs/BLUEPRINT.md](../docs/BLUEPRINT.md#notion-workspace-three-board-databases-people-briefs-and-engine-status-built-by-one-command). Create an empty "Engine status" page too.
-- **Seed rows yourself.** Paste a Devpost link, a posting or an arXiv ID into a Bot's chat and say "add this as a New row, then triage it". This replaces the engine's scouts and scorers: the Bot uses its own judgment and fills in Score and Why.
-- **Run the skills on demand** (`/captain-triage`, `/career-deep-dive` and so on). Enable the routines once you have 10 or more rows per board.
+- The Hackathon Captain's and Research Lead's routines open with an "engine hasn't run" warning and work on the rows already in Notion.
+- **Seed rows yourself.** Paste a Devpost link or an arXiv ID into the Bot's chat and say "add this as a New row, then triage it". The Bot uses its own judgment and fills in Score and Why.
+- **Run the skills on demand** (`/captain-triage`, `/research-experiment-runner` and so on).
 
 ### Skill files → skill names
 

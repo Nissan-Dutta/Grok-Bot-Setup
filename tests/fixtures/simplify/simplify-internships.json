@@ -1,0 +1,101 @@
+[
+ {
+  "source": "Simplify",
+  "category": "AI/ML/Data",
+  "company_name": "EvalCo",
+  "id": "s1",
+  "title": "Research Engineer Intern, Evals",
+  "active": true,
+  "terms": [
+   "Summer 2027"
+  ],
+  "date_posted": 1790300000,
+  "url": "https://job-boards.greenhouse.io/evalco/jobs/101?gh_src=simplify",
+  "locations": [
+   "SF"
+  ],
+  "is_visible": true,
+  "sponsorship": "Does Not Offer Sponsorship",
+  "degrees": [
+   "Bachelor's"
+  ]
+ },
+ {
+  "source": "Simplify",
+  "category": "AI/ML/Data",
+  "company_name": "BigCo",
+  "id": "s2",
+  "title": "Machine Learning Intern - PhD",
+  "active": true,
+  "terms": [
+   "Summer 2027"
+  ],
+  "date_posted": 1790300000,
+  "url": "https://bigco.example/jobs/2",
+  "locations": [
+   "Remote in USA"
+  ],
+  "is_visible": true,
+  "sponsorship": "Other",
+  "degrees": [
+   "PhD"
+  ]
+ },
+ {
+  "source": "Simplify",
+  "category": "AI/ML/Data",
+  "company_name": "OldCo",
+  "id": "s3",
+  "title": "Data Analyst Intern",
+  "active": false,
+  "terms": [
+   "Summer 2027"
+  ],
+  "date_posted": 1790300000,
+  "url": "https://oldco.example/3",
+  "locations": [
+   "NYC"
+  ],
+  "is_visible": true,
+  "sponsorship": "Other",
+  "degrees": []
+ },
+ {
+  "source": "Simplify",
+  "category": "Hardware",
+  "company_name": "ChipCo",
+  "id": "s4",
+  "title": "Hardware Intern",
+  "active": true,
+  "terms": [
+   "Summer 2027"
+  ],
+  "date_posted": 1790300000,
+  "url": "https://chipco.example/4",
+  "locations": [
+   "Austin, TX"
+  ],
+  "is_visible": true,
+  "sponsorship": "Other",
+  "degrees": []
+ },
+ {
+  "source": "Simplify",
+  "category": "Software",
+  "company_name": "EUCo",
+  "id": "s5",
+  "title": "Software Engineer Intern",
+  "active": true,
+  "terms": [
+   "Summer 2027"
+  ],
+  "date_posted": 1790300000,
+  "url": "https://euco.example/5",
+  "locations": [
+   "Berlin, Germany"
+  ],
+  "is_visible": true,
+  "sponsorship": "Other",
+  "degrees": []
+ }
+]

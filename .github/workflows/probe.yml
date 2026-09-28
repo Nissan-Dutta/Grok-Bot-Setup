@@ -1,0 +1,21 @@
+name: Probe boards
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "43 9 * * 1"   # Mondays: catch companies that moved ATS
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m boards probe

@@ -1,0 +1,46 @@
+{
+ "apiVersion": "1",
+ "jobs": [
+  {
+   "id": "a1",
+   "title": "Member of Technical Staff, Exceptional Generalist (Remote)",
+   "department": "Eng",
+   "team": "Eng",
+   "employmentType": "FullTime",
+   "location": "Remote",
+   "secondaryLocations": [],
+   "publishedAt": "2026-09-25T10:00:00.000+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Remote",
+   "jobUrl": "https://jobs.ashbyhq.com/infra/a1",
+   "applyUrl": "https://jobs.ashbyhq.com/infra/a1/application",
+   "descriptionPlain": "Inference engines, vLLM, kernels. Graduating 2026 or 2027."
+  },
+  {
+   "id": "a2",
+   "title": "AI Infra Resident (1-Year Program)",
+   "employmentType": "FullTime",
+   "location": "San Francisco",
+   "secondaryLocations": [
+    {
+     "location": "Singapore"
+    }
+   ],
+   "publishedAt": "2026-06-01T10:00:00.000+00:00",
+   "isListed": true,
+   "isRemote": false,
+   "workplaceType": "OnSite",
+   "jobUrl": "https://jobs.ashbyhq.com/infra/a2",
+   "descriptionPlain": "A one-year residency on inference systems."
+  },
+  {
+   "id": "a3",
+   "title": "Hidden role",
+   "location": "Remote",
+   "isListed": false,
+   "jobUrl": "https://jobs.ashbyhq.com/infra/a3",
+   "publishedAt": "2026-09-25T10:00:00Z"
+  }
+ ]
+}

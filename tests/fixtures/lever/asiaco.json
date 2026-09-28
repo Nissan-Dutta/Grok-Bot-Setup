@@ -1,0 +1,54 @@
+[
+ {
+  "id": "l1",
+  "text": "Machine Learning Intern",
+  "categories": {
+   "commitment": "Intern",
+   "location": "Singapore",
+   "team": "Data",
+   "allLocations": [
+    "Singapore"
+   ]
+  },
+  "workplaceType": "onsite",
+  "createdAt": 1790400000000,
+  "hostedUrl": "https://jobs.lever.co/asiaco/l1",
+  "descriptionPlain": "Summer internship.",
+  "lists": [
+   {
+    "text": "Requirements",
+    "content": "<li>Python</li>"
+   }
+  ]
+ },
+ {
+  "id": "l2",
+  "text": "AI Tutor - Arabic",
+  "categories": {
+   "commitment": "Contract",
+   "location": "Remote",
+   "allLocations": [
+    "Remote"
+   ]
+  },
+  "workplaceType": "remote",
+  "createdAt": 1790400000000,
+  "hostedUrl": "https://jobs.lever.co/asiaco/l2",
+  "descriptionPlain": "Tutor."
+ },
+ {
+  "id": "l3",
+  "text": "AI Tutor - Coding (Python)",
+  "categories": {
+   "commitment": "Contract",
+   "location": "Remote",
+   "allLocations": [
+    "Remote"
+   ]
+  },
+  "workplaceType": "remote",
+  "createdAt": 1790400000000,
+  "hostedUrl": "https://jobs.lever.co/asiaco/l3",
+  "descriptionPlain": "Evaluate model code."
+ }
+]

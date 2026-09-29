@@ -76,6 +76,21 @@ def test_auto_probe_skips_missing_boards():
         scout_company(Company("GoneCo", ats="ashby", slug="gone"), fetchers)
 
 
+def test_auto_probe_skips_empty_boards_before_finding_jobs():
+    fetchers = {
+        "greenhouse": (lambda _slug: {"jobs": []}, parse_greenhouse),
+        "ashby": (lambda _slug: load("ashby/infra.json"), parse_ashby),
+    }
+    postings, resolved = scout_company(Company("InfraCo", ats="auto", slug="infra"), fetchers)
+    assert resolved == ("ashby", "infra") and len(postings) == 2
+
+
+def test_explicit_ats_accepts_empty_board_without_error():
+    fetchers = {"greenhouse": (lambda _slug: {"jobs": []}, parse_greenhouse)}
+    postings, resolved = scout_company(Company("EvalCo", ats="greenhouse", slug="evalco"), fetchers)
+    assert postings == [] and resolved == ("greenhouse", "evalco")
+
+
 def test_simplify_filters_inactive_and_category():
     ps = parse_simplify(load("simplify/simplify-internships.json"), "simplify-internships",
                         categories=["AI/ML/Data", "Software"], terms=["Summer 2027"])
